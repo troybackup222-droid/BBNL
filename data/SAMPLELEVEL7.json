@@ -1,0 +1,17 @@
+{
+    "id": 1598654,
+    "name": "Nhelv Nerfed",
+    "author": "notjackz",
+    "creators": ["Dashingdare9"],
+    "verifier": "Dashingdare9",
+    "verification": "https://www.youtube.com/watch?v=7o-wBLaGVMg",
+    "percentToQualify": "68",
+    "password": "46290",
+    "records": [
+        {
+            "user": "Daelite",
+            "link": "https://www.youtube.com/watch?v=cXUyVG6V7zs",
+            "percent": 100,
+            "hz": 60
+        }
+    ]

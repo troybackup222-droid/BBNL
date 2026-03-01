@@ -34,7 +34,30 @@ export default {
                             </button>
                         </td>
                     </tr>
-                </table>
+               </table>
+
+<h2 v-if="level.positionHistory && level.positionHistory.length">
+  Position History
+</h2>
+
+<table
+  v-if="level.positionHistory && level.positionHistory.length"
+  class="position-history"
+>
+  <tr>
+    <th>Position</th>
+    <th>Change</th>
+    <th>Cause</th>
+    <th>Date</th>
+  </tr>
+
+  <tr v-for="entry in level.positionHistory" :key="entry.date">
+    <td>{{ entry.position }}</td>
+    <td>{{ entry.change }}</td>
+    <td>{{ entry.cause }}</td>
+    <td>{{ entry.date }}</td>
+  </tr>
+</table>
             </div>
             <div class="level-container">
                 <div class="level" v-if="level">

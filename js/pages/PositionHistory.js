@@ -26,9 +26,13 @@ export default {
             <div class="meta">
                 <h1>Position History</h1>
 
-                <ul class="position-history-list">
-                    <li v-for="name in levels" :key="name">
-                        <span class="type-label-lg">{{ name }}</span>
+                <ul class="level-list">
+                    <li
+                        v-for="level in levels"
+                        :key="level"
+                        class="level-item"
+                    >
+                        {{ level }}
                     </li>
                 </ul>
             </div>

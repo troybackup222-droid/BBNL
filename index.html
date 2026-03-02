@@ -49,6 +49,11 @@
                     <span class="type-label-lg">Roulette</span>
                 </router-link>
 
+                <!-- ✅ NEW TAB -->
+                <router-link class="nav__tab" to="/position-history">
+                    <span class="type-label-lg">Position Historys</span>
+                </router-link>
+
                 <div class="nav__actions">
                     <button
                         class="nav__icon"
@@ -75,18 +80,7 @@
             </nav>
         </header>
 
-        <!-- 
-          Vue Router renders pages here.
-          Levels, Records, and Position History
-          MUST be rendered inside Vue components,
-          NOT in this HTML file.
-        -->
+        <!-- Vue renders ALL pages here -->
         <router-view :class="{ dark: store.dark }"></router-view>
-
-        <!-- 
-          Position History CANNOT be placed here
-          because `level` does not exist in HTML.
-          It belongs in /js/pages/List.js
-        -->
     </body>
 </html>

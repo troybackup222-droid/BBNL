@@ -40,6 +40,10 @@ export default {
   Position History
 </h2>
 
+<div v-if="level">
+    <div v-for="tag in level.tags" class="tag">{{tag}}</div>
+</div>
+
 <table
   v-if="level.positionHistory && level.positionHistory.length"
   class="position-history"

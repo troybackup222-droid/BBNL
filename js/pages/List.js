@@ -36,40 +36,34 @@ export default {
                     </tr>
                </table>
 
-                <h2 v-if="level?.positionHistory && level.positionHistory.length">
-                  Position History
-                </h2>
+<h2 v-if="level.positionHistory && level.positionHistory.length">
+  Position History
+</h2>
 
-                <div v-if="level?.tags">
-                    <div v-for="tag in level.tags" class="tag">{{ tag }}</div>
-                </div>
+<table
+  v-if="level.positionHistory && level.positionHistory.length"
+  class="position-history"
+>
+  <tr>
+    <th>Position</th>
+    <th>Change</th>
+    <th>Cause</th>
+    <th>Date</th>
+  </tr>
 
-                <table
-                  v-if="level?.positionHistory && level.positionHistory.length"
-                  class="position-history"
-                >
-                  <tr>
-                    <th>Position</th>
-                    <th>Change</th>
-                    <th>Cause</th>
-                    <th>Date</th>
-                  </tr>
-
-                  <tr v-for="entry in level.positionHistory" :key="entry.date">
-                    <td>{{ entry.position }}</td>
-                    <td>{{ entry.change }}</td>
-                    <td>{{ entry.cause }}</td>
-                    <td>{{ entry.date }}</td>
-                  </tr>
-                </table>
+  <tr v-for="entry in level.positionHistory" :key="entry.date">
+    <td>{{ entry.position }}</td>
+    <td>{{ entry.change }}</td>
+    <td>{{ entry.cause }}</td>
+    <td>{{ entry.date }}</td>
+  </tr>
+</table>
             </div>
-
             <div class="level-container">
                 <div class="level" v-if="level">
                     <h1>{{ level.name }}</h1>
                     <LevelAuthors :author="level.author" :creators="level.creators" :verifier="level.verifier"></LevelAuthors>
                     <iframe class="video" id="videoframe" :src="video" frameborder="0"></iframe>
-
                     <ul class="stats">
                         <li>
                             <div class="type-title-sm">Points when completed</div>
@@ -88,12 +82,10 @@ export default {
                             <p>{{ level.handcam || 'Not Required' }}</p>
                         </li>
                     </ul>
-
                     <h2>Records</h2>
                     <p v-if="selected + 1 <= 75"><strong>{{ level.percentToQualify }}%</strong> or better to qualify</p>
                     <p v-else-if="selected +1 <= 150"><strong>100%</strong> or better to qualify</p>
                     <p v-else>This level does not accept new records.</p>
-
                     <table class="records">
                         <tr v-for="record in level.records" class="record">
                             <td class="percent">
@@ -111,25 +103,18 @@ export default {
                         </tr>
                     </table>
                 </div>
-
                 <div v-else class="level" style="height: 100%; justify-content: center; align-items: center;">
                     <p>(ノಠ益ಠ)ノ彡┻━┻</p>
                 </div>
             </div>
-
             <div class="meta-container">
                 <div class="meta">
                     <div class="errors" v-show="errors.length > 0">
                         <p class="error" v-for="error of errors">{{ error }}</p>
                     </div>
-
                     <div class="og">
-                        <p class="type-label-md">
-                            Website layout made by 
-                            <a href="https://tsl.pages.dev/" target="_blank">TheShittyList</a>
-                        </p>
+                        <p class="type-label-md">Website layout made by <a href="https://tsl.pages.dev/" target="_blank">TheShittyList</a></p>
                     </div>
-
                     <template v-if="editors">
                         <h3>List Editors</h3>
                         <ol class="editors">
@@ -140,16 +125,31 @@ export default {
                             </li>
                         </ol>
                     </template>
-
                     <h3>Submission Requirements</h3>
-                    <p>Raw Footage and footage is required for a submittion</p>
-                    <p>Achieved the record on the level that is listed on the site - please check the level ID before you submit a record</p>
-                    <p>FIGURING OUT WHAT TO PUT...</p>
-                    <p>The recording must have a previous attempt and entire death animation shown before the completion, unless the completion is on the first attempt. Everyplay records are exempt from this</p>
-                    <p>Before ending video must show completion screen and attempt count, etc</p>
-                    <p>FIGURING OUT WHAT TO PUT...</p>
-                    <p>FIGURING OUT WHAT TO PUT...</p>
-                    <p>FIGURING OUT WHAT TO PUT...</p>
+                    <p>
+                        Raw Footage and footage is required for a submittion
+                    </p>
+                    <p>
+                        Achieved the record on the level that is listed on the site - please check the level ID before you submit a record
+                    </p>
+                    <p>
+                        FIGURING OUT WHAT TO PUT...
+                    </p>
+                    <p>
+                        The recording must have a previous attempt and entire death animation shown before the completion, unless the completion is on the first attempt. Everyplay records are exempt from this
+                    </p>
+                    <p>
+                        Before ending video must show completion screen and attempt count, etc
+                    </p>
+                    <p>
+                        FIGURING OUT WHAT TO PUT...
+                    </p>
+                    <p>
+                        FIGURING OUT WHAT TO PUT...
+                    </p>
+                    <p>
+                        FIGURING OUT WHAT TO PUT...
+                    </p>
                 </div>
             </div>
         </main>
@@ -161,18 +161,15 @@ export default {
         selected: 0,
         errors: [],
         roleIconMap,
-        store,
-        toggledShowcase: false // ✅ added
+        store
     }),
     computed: {
         level() {
-            return this.list[this.selected]?.[0]; // ✅ safe access
+            return this.list[this.selected][0];
         },
         video() {
-            if (!this.level) return "";
-
             if (!this.level.showcase) {
-                return embed(this.level.verification || "");
+                return embed(this.level.verification);
             }
 
             return embed(
@@ -183,9 +180,11 @@ export default {
         },
     },
     async mounted() {
+        // Hide loading spinner
         this.list = await fetchList();
         this.editors = await fetchEditors();
 
+        // Error handling
         if (!this.list) {
             this.errors = [
                 "Failed to load list. Retry in a few minutes or notify list staff.",
@@ -195,10 +194,9 @@ export default {
                 ...this.list
                     .filter(([_, err]) => err)
                     .map(([_, err]) => {
-                        return \`Failed to load level. (\${err}.json)\`;
+                        return `Failed to load level. (${err}.json)`;
                     })
             );
-
             if (!this.editors) {
                 this.errors.push("Failed to load list editors.");
             }

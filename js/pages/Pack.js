@@ -5,9 +5,12 @@
     <div v-for="tier in tiers" :key="tier.name" class="tier-section">
       <h2>{{ tier.name }} Tier</h2>
 
-      <div class="tier-columns">
-        <div v-for="pack in tier.packs" :key="pack" class="pack">
-          {{ pack }}
+      <div v-for="pack in tier.packs" :key="pack.name" class="pack-section">
+        <h3>{{ pack.name }}</h3>
+        <div class="level-columns">
+          <div v-for="level in pack.levels" :key="level" class="level">
+            {{ level }}
+          </div>
         </div>
       </div>
     </div>
@@ -21,25 +24,28 @@ export default {
     return {
       tiers: [
         {
-          name: "Iron Tier",
-          packs: ["GD Remake I", "Tiny Sparks", "Mini Blaze"]
+          name: "Iron",
+          packs: [
+            {
+              name: "GD Remake I",
+              levels: ["Eruption Nerfed", "Tiny Sparks"]
+            },
+            {
+              name: "Blaze Pack",
+              levels: ["Mini Blaze", "Spark Rush"]
+            }
+          ]
         },
         {
-          name: "Bronze Tier",
-          packs: ["Blaze Fury", "Spark Rush"]
-        },
-        {
-          name: "Silver Tier",
-          packs: ["Firestorm", "Eruption", "Voltix"]
-        },
-        {
-          name: "Gold Tier",
-          packs: ["Inferno", "Pyroblast"]
-        },
-        {
-          name: "Platinum Tier",
-          packs: ["Ultimate Blaze"]
+          name: "Bronze",
+          packs: [
+            {
+              name: "Firestorm Pack",
+              levels: ["Firestorm", "Voltix"]
+            }
+          ]
         }
+        // Add more tiers/packs here
       ]
     };
   }
@@ -56,7 +62,7 @@ export default {
 }
 
 .tier-section {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .tier-section h2 {
@@ -64,13 +70,23 @@ export default {
   margin-bottom: 12px;
 }
 
-.tier-columns {
+.pack-section {
+  margin-bottom: 20px;
+}
+
+.pack-section h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* Columns for levels inside each pack */
+.level-columns {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-.pack {
+.level {
   flex: 1 1 180px; /* column width */
   padding: 10px 12px;
   border-radius: 8px;

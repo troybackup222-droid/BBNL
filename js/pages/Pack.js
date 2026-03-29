@@ -2,11 +2,15 @@
   <div class="packs-page">
     <h1>Packs by Tier</h1>
 
+    <!-- Loop through tiers -->
     <div v-for="tier in tiers" :key="tier.name" class="tier-section">
       <h2>{{ tier.name }} Tier</h2>
 
+      <!-- Loop through packs in the tier -->
       <div v-for="pack in tier.packs" :key="pack.name" class="pack-section">
         <h3>{{ pack.name }}</h3>
+
+        <!-- Levels in the pack -->
         <div class="level-columns">
           <div v-for="level in pack.levels" :key="level" class="level">
             {{ level }}
@@ -26,33 +30,29 @@ export default {
         {
           name: "Iron",
           packs: [
-            {
-              name: "GD Remake I",
-              levels: ["Eruption Nerfed", "Tiny Sparks"]
-            },
-            {
-              name: "Blaze Pack",
-              levels: ["Mini Blaze", "Spark Rush"]
-            }
+            { name: "GD Remake I", levels: ["Eruption Nerfed", "Tiny Sparks"] },
+            { name: "Blaze Pack", levels: ["Mini Blaze", "Spark Rush"] }
           ]
         },
         {
           name: "Bronze",
           packs: [
-            {
-              name: "Firestorm Pack",
-              levels: ["Firestorm", "Voltix"]
-            }
+            { name: "Firestorm Pack", levels: ["Firestorm", "Voltix"] }
+          ]
+        },
+        {
+          name: "Silver",
+          packs: [
+            { name: "Inferno Pack", levels: ["Inferno", "Pyroblast"] }
           ]
         }
-        // Add more tiers/packs here
       ]
     };
   }
 };
 </script>
 
-<style>
+<style scoped>
 .packs-page {
   padding: 20px;
   max-width: 1000px;
@@ -61,6 +61,7 @@ export default {
   color: white;
 }
 
+/* Tier sections */
 .tier-section {
   margin-bottom: 40px;
 }
@@ -70,6 +71,7 @@ export default {
   margin-bottom: 12px;
 }
 
+/* Pack sections */
 .pack-section {
   margin-bottom: 20px;
 }
@@ -87,7 +89,7 @@ export default {
 }
 
 .level {
-  flex: 1 1 180px; /* column width */
+  flex: 1 1 180px;
   padding: 10px 12px;
   border-radius: 8px;
   background: linear-gradient(135deg, #1f1f1f, #2a2a2a);

@@ -1,100 +1,65 @@
-<template>
-  <div class="packs-page">
-    <h1>Packs by Tier</h1>
-
-    <!-- Loop through tiers -->
-    <div v-for="tier in tiers" :key="tier.name" class="tier-section">
-      <h2>{{ tier.name }} Tier</h2>
-
-      <!-- Loop through packs in the tier -->
-      <div v-for="pack in tier.packs" :key="pack.name" class="pack-section">
-        <h3>{{ pack.name }}</h3>
-
-        <!-- Levels in the pack -->
-        <div class="level-columns">
-          <div v-for="level in pack.levels" :key="level" class="level">
-            {{ level }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  name: "PacksPage",
-  data() {
-    return {
-      tiers: [
-        {
-          name: "Iron",
-          packs: [
-            { name: "GD Remake I", levels: ["Eruption Nerfed", "Tiny Sparks"] },
-            { name: "Blaze Pack", levels: ["Mini Blaze", "Spark Rush"] }
-          ]
-        },
-        {
-          name: "Bronze",
-          packs: [
-            { name: "Firestorm Pack", levels: ["Firestorm", "Voltix"] }
-          ]
-        },
-        {
-          name: "Silver",
-          packs: [
-            { name: "Inferno Pack", levels: ["Inferno", "Pyroblast"] }
-          ]
-        }
-      ]
-    };
+// packs.js
+const tiers = [
+  {
+    name: "Iron",
+    packs: [
+      { name: "GD Remake I", levels: ["Eruption Nerfed", "Tiny Sparks"] },
+      { name: "Blaze Pack", levels: ["Mini Blaze", "Spark Rush"] }
+    ]
+  },
+  {
+    name: "Bronze",
+    packs: [
+      { name: "Firestorm Pack", levels: ["Firestorm", "Voltix"] }
+    ]
+  },
+  {
+    name: "Silver",
+    packs: [
+      { name: "Inferno Pack", levels: ["Inferno", "Pyroblast"] }
+    ]
   }
-};
-</script>
+];
 
-<style scoped>
-.packs-page {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  font-family: 'Lexend Deca', sans-serif;
-  color: white;
-}
+// Function to render packs page
+function renderPacksPage(containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = ""; // clear previous content
 
-/* Tier sections */
-.tier-section {
-  margin-bottom: 40px;
-}
+  const title = document.createElement("h1");
+  title.textContent = "Packs by Tier";
+  container.appendChild(title);
 
-.tier-section h2 {
-  font-size: 22px;
-  margin-bottom: 12px;
-}
+  tiers.forEach(tier => {
+    const tierSection = document.createElement("div");
+    tierSection.className = "tier-section";
 
-/* Pack sections */
-.pack-section {
-  margin-bottom: 20px;
-}
+    const tierTitle = document.createElement("h2");
+    tierTitle.textContent = `${tier.name} Tier`;
+    tierSection.appendChild(tierTitle);
 
-.pack-section h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
-}
+    tier.packs.forEach(pack => {
+      const packSection = document.createElement("div");
+      packSection.className = "pack-section";
 
-/* Columns for levels inside each pack */
-.level-columns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+      const packTitle = document.createElement("h3");
+      packTitle.textContent = pack.name;
+      packSection.appendChild(packTitle);
 
-.level {
-  flex: 1 1 180px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-  text-align: center;
-  font-weight: 600;
-  font-size: 14px;
+      const levelsContainer = document.createElement("div");
+      levelsContainer.className = "level-columns";
+
+      pack.levels.forEach(level => {
+        const levelDiv = document.createElement("div");
+        levelDiv.className = "level";
+        levelDiv.textContent = level;
+        levelsContainer.appendChild(levelDiv);
+      });
+
+      packSection.appendChild(levelsContainer);
+      tierSection.appendChild(packSection);
+    });
+
+    container.appendChild(tierSection);
+  });
 }
-</style>

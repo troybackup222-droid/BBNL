@@ -2,9 +2,7 @@
 import Spinner from '../components/Spinner.js';
 
 export default {
-  components: {
-    Spinner,
-  },
+  components: { Spinner },
   data: () => ({
     loading: true,
     tiers: [
@@ -30,10 +28,10 @@ export default {
     ],
   }),
   template: `
-    <main v-if="loading">
+    <main v-if="loading" class="page-spinner-container">
       <Spinner></Spinner>
     </main>
-    <main v-else class="packs-page">
+    <main v-else class="packs-page-container">
       <h1>Packs by Tier</h1>
       <div v-for="tier in tiers" :key="tier.name" class="tier-section">
         <h2>{{ tier.name }} Tier</h2>
@@ -49,9 +47,9 @@ export default {
     </main>
   `,
   async mounted() {
-    // Simulate loading delay to show Spinner like leaderboard
+    // Show spinner for 200ms to simulate loading
     setTimeout(() => {
       this.loading = false;
-    }, 300); // can be 0 if no delay needed
+    }, 200);
   },
 };

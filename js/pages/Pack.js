@@ -1,55 +1,52 @@
-// PacksPage.js
-import Spinner from '../components/Spinner.js';
+// main.js (full ready-to-use)
+import { store } from "../main.js";
+import { embed, localize } from "../util.js";
+import { score } from "../score.js";
+import { fetchEditors, fetchList, fetchLeaderboard } from "../content.js";
 
-export default {
-  components: { Spinner },
-  data: () => ({
-    loading: true,
-    tiers: [
-      {
-        name: "Iron",
-        packs: [
-          { name: "GD Remake I", levels: ["Eruption Nerfed", "Tiny Sparks"] },
-          { name: "Blaze Pack", levels: ["Mini Blaze", "Spark Rush"] },
-        ],
-      },
-      {
-        name: "Bronze",
-        packs: [
-          { name: "Firestorm Pack", levels: ["Firestorm", "Voltix"] },
-        ],
-      },
-      {
-        name: "Silver",
-        packs: [
-          { name: "Inferno Pack", levels: ["Inferno", "Pyroblast"] },
-        ],
-      },
-    ],
-  }),
-  template: `
-    <main v-if="loading" class="page-spinner-container">
-      <Spinner></Spinner>
-    </main>
-    <main v-else class="packs-page-container">
-      <h1>Packs by Tier</h1>
-      <div v-for="tier in tiers" :key="tier.name" class="tier-section">
-        <h2>{{ tier.name }} Tier</h2>
-        <div v-for="pack in tier.packs" :key="pack.name" class="pack-section">
-          <h3>{{ pack.name }}</h3>
-          <div class="level-columns">
-            <div v-for="level in pack.levels" :key="level" class="level">
-              {{ level }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  `,
-  async mounted() {
-    // Show spinner for 200ms to simulate loading
-    setTimeout(() => {
-      this.loading = false;
-    }, 200);
-  },
+// Components
+import Spinner from "../components/Spinner.js";
+import LevelAuthors from "../components/List/LevelAuthors.js";
+import Btn from "../components/Btn.js";
+
+// Pages
+import ListPage from "./ListPage.js";
+import LeaderboardPage from "./LeaderboardPage.js";
+import RoulettePage from "./RoulettePage.js";
+import PositionHistoryPage from "./PositionHistoryPage.js";
+import PacksPage from "./PacksPage.js"; // <-- Added PacksPage import
+
+// Vue Router setup
+const routes = {
+  '/': ListPage,
+  '/leaderboard': LeaderboardPage,
+  '/roulette': RoulettePage,
+  '/position-history': PositionHistoryPage,
+  '/packs': PacksPage, // <-- Added Packs route
 };
+
+// Simple router-view handling
+const app = Vue.createApp({
+  data() {
+    return {
+      currentRoute: window.location.pathname,
+    };
+  },
+  computed: {
+    CurrentPage() {
+      return routes[this.currentRoute] || ListPage;
+    },
+  },
+  render() {
+    return Vue.h(this.CurrentPage);
+  },
+  mounted() {
+    // Update currentRoute when URL changes
+    window.addEventListener('popstate', () => {
+      this.currentRoute = window.location.pathname;
+    });
+  },
+});
+
+// Mount Vue app
+app.mount('#app');

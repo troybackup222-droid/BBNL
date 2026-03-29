@@ -24,6 +24,30 @@
     <link rel="stylesheet" href="/css/components/btn.css" />
     <link rel="stylesheet" href="/css/components/tabs.css" />
 
+    <!-- ✅ TAG STYLES ADDED HERE -->
+    <style>
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #5c6cff, #8a7dff);
+        }
+
+        /* Optional colors */
+        .tag-wave { background: #3aa0ff; }
+        .tag-fast-paced { background: #ff6a3a; }
+        .tag-skill-based { background: #9b59b6; }
+    </style>
+
     <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script>
     <script type="module" src="/js/main.js"></script>
@@ -72,6 +96,10 @@
     </nav>
 </header>
 
+<!-- ✅ DO NOT TOUCH THIS -->
 <router-view :class="{ dark: store.dark }"></router-view>
+
+</body>
+</html>
 </body>
 </html>

@@ -1,9 +1,12 @@
-.packs-page {
+/* PacksPage.css */
+.packs-page-container {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
   font-family: 'Lexend Deca', sans-serif;
   color: white;
+  background-color: #0d0d0d; /* dark page background */
+  min-height: calc(100vh - 60px); /* fill viewport minus nav */
 }
 
 .tier-section {
@@ -38,4 +41,12 @@
   text-align: center;
   font-weight: 600;
   font-size: 14px;
+}
+
+/* Optional spinner alignment like leaderboard */
+.page-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
 }

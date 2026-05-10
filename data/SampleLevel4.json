@@ -9,22 +9,3 @@
     "records": [
     ]
  }
-
-  "positionHistory": [
-     "position": "#4",
-      "change": "↓ 1",
-      "cause": "Quiet Space Nerfed was placed above",
-      "date": "2/4/2026"
-    {
-      "position": "#3",
-      "change": "↓ 1",
-      "cause": "Eruption Nerfed was placed above",
-      "date": "2/1/2026"
-    },
-    {
-      "position": "#2",
-      "change": "—",
-      "cause": "Placed at #2",
-      "date": "9/24/2025"
-    }
-  ]

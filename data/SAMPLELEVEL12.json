@@ -7,7 +7,13 @@
     "verification": "https://www.youtube.com/watch?v=jCfDpCI4ClA",
     "percentToQualify": "68",
     "records": [
-                                        {
+                                {
+            "user": "Jyntrix",
+            "link": "https://www.youtube.com/watch?v=UxMM01Uz4NE",
+            "percent": 100,
+            "hz": 240
+        },
+                                {
             "user": "Dashingdare9",
             "link": "https://www.youtube.com/watch?v=jQDXTwVgShk",
             "percent": 100,
